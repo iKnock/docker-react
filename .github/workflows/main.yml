@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@main
 
       - name: Build Docker image
         run: |
@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Deploy to Elastic Beanstalk
-        uses: aws-action/elastic-beanstalk-deploy@v1
+        uses: aws-action/elastic-beanstalk-deploy
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
