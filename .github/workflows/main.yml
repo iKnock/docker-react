@@ -20,18 +20,13 @@ jobs:
     needs: build
 
     steps:
-      - name: Deploy to AWS Elastic Beanstalk
-        run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set region 'eu-west-3'
-          eb deploy frontend-env
-
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            region: "eu-west-3"
-            application-name: "frontend"
-            environment-name: "Frontend-env"
-            bucket-name: "elasticbeanstalk-eu-west-3-905691979741"
-            bucket-path: "frontend"
+      - name: Deploy to Elastic Beanstalk
+        uses: aws-action/elastic-beanstalk-deploy@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: "eu-west-3"
+          application-name: "frontend"
+          environment-name: "Frontend-env"
+          bucket-name: "elasticbeanstalk-eu-west-3-905691979741"
+          bucket-path: "frontend"
